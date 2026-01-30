@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LUXE - Premium Shopping Experience</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0a0a0a;
+            --secondary: #f5f5f0;
+            --accent: #c9a55a;
+            --text: #2a2a2a;
+            --text-light: #6a6a6a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: var(--secondary);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        /* Header & Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(245, 245, 240, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(201, 165, 90, 0.2);
+            animation: slideDown 0.6s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-family: 'Cinzel', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 400;
+            font-size: 0.95rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-icons {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav-icons button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2rem;
+            color: var(--text);
+            transition: color 0.3s;
+        }
+
+        .nav-icons button:hover {
+            color: var(--accent);
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 90px;
+            height: 90vh;
+            background: linear-gradient(135deg, rgba(10, 10, 10, 0.9), rgba(42, 42, 42, 0.7)),
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><rect fill="%23f5f5f0" width="1200" height="800"/><g fill-opacity="0.03"><polygon fill="%23444" points="1200 0 0 0 0 800"/></g></svg>');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 50%, rgba(201, 165, 90, 0.1), transparent);
+            animation: pulse 8s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        .hero-content {
+            text-align: center;
+            color: var(--secondary);
+            z-index: 1;
+            animation: fadeInUp 1s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 5rem;
+            font-weight: 700;
+            letter-spacing: 8px;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease 0.2s backwards;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            letter-spacing: 3px;
+            margin-bottom: 3rem;
+            font-weight: 300;
+            animation: fadeInUp 1s ease 0.4s backwards;
+        }
+
+        .cta-button {
+            padding: 1.2rem 3rem;
+            background: var(--accent);
+            color: var(--primary);
+            border: none;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 1s ease 0.6s backwards;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: var(--primary);
+            transform: translate(-50%, -50%);
+            transition: width 0.4s, height 0.4s;
+            border-radius: 50%;
+        }
+
+        .cta-button:hover::before {
+            width: 300%;
+            height: 300%;
+        }
+
+        .cta-button:hover {
+            color: var(--accent);
+        }
+
+        .cta-button span {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Featured Categories */
+        .categories {
+            padding: 8rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-family: 'Cinzel', serif;
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 1rem;
+            letter-spacing: 4px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-light);
+            font-size: 1.1rem;
+            margin-bottom: 4rem;
+            letter-spacing: 1px;
+        }
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .category-card {
+            position: relative;
+            height: 450px;
+            overflow: hidden;
+            cursor: pointer;
+            background: var(--primary);
+            animation: fadeIn 0.8s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .category-card:nth-child(1) { animation-delay: 0.1s; }
+        .category-card:nth-child(2) { animation-delay: 0.2s; }
+        .category-card:nth-child(3) { animation-delay: 0.3s; }
+
+        .category-image {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #c9a55a, #8a7245);
+            transition: transform 0.6s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+        }
+
+        .category-card:hover .category-image {
+            transform: scale(1.1);
+        }
+
+        .category-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 2rem;
+            background: linear-gradient(to top, rgba(10, 10, 10, 0.95), transparent);
+            color: var(--secondary);
+            transform: translateY(50%);
+            transition: transform 0.4s;
+        }
+
+        .category-card:hover .category-overlay {
+            transform: translateY(0);
+        }
+
+        .category-overlay h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            letter-spacing: 2px;
+        }
+
+        .category-overlay p {
+            font-size: 0.95rem;
+            opacity: 0;
+            transition: opacity 0.4s 0.2s;
+        }
+
+        .category-card:hover .category-overlay p {
+            opacity: 1;
+        }
+
+        /* Featured Products */
+        .products {
+            padding: 8rem 5%;
+            background: var(--primary);
+            color: var(--secondary);
+        }
+
+        .products .section-title {
+            color: var(--secondary);
+        }
+
+        .products .section-subtitle {
+            color: rgba(245, 245, 240, 0.7);
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2.5rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .product-card {
+            background: rgba(245, 245, 240, 0.05);
+            border: 1px solid rgba(201, 165, 90, 0.2);
+            overflow: hidden;
+            transition: all 0.4s;
+            animation: fadeIn 0.8s ease;
+        }
+
+        .product-card:nth-child(1) { animation-delay: 0.1s; }
+        .product-card:nth-child(2) { animation-delay: 0.2s; }
+        .product-card:nth-child(3) { animation-delay: 0.3s; }
+        .product-card:nth-child(4) { animation-delay: 0.4s; }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent);
+            box-shadow: 0 20px 40px rgba(201, 165, 90, 0.2);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(135deg, #2a2a2a, #4a4a4a);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            transition: all 0.4s;
+        }
+
+        .product-card:hover .product-image {
+            background: linear-gradient(135deg, #c9a55a, #8a7245);
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-info h4 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            letter-spacing: 1px;
+        }
+
+        .product-price {
+            color: var(--accent);
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin: 1rem 0;
+        }
+
+        .add-to-cart {
+            width: 100%;
+            padding: 0.8rem;
+            background: transparent;
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .add-to-cart:hover {
+            background: var(--accent);
+            color: var(--primary);
+        }
+
+        /* Newsletter */
+        .newsletter {
+            padding: 6rem 5%;
+            background: var(--accent);
+            color: var(--primary);
+            text-align: center;
+        }
+
+        .newsletter h2 {
+            font-family: 'Cinzel', serif;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            letter-spacing: 3px;
+        }
+
+        .newsletter p {
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .newsletter-form {
+            display: flex;
+            max-width: 600px;
+            margin: 0 auto;
+            gap: 1rem;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            padding: 1rem 1.5rem;
+            border: 2px solid var(--primary);
+            background: transparent;
+            color: var(--primary);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+        }
+
+        .newsletter-form input::placeholder {
+            color: rgba(10, 10, 10, 0.6);
+        }
+
+        .newsletter-form button {
+            padding: 1rem 2.5rem;
+            background: var(--primary);
+            color: var(--accent);
+            border: none;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .newsletter-form button:hover {
+            background: var(--secondary);
+            color: var(--primary);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary);
+            color: var(--secondary);
+            padding: 4rem 5% 2rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 3rem;
+            max-width: 1400px;
+            margin: 0 auto 3rem;
+        }
+
+        .footer-section h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            letter-spacing: 2px;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-section a {
+            color: rgba(245, 245, 240, 0.7);
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 0.95rem;
+        }
+
+        .footer-section a:hover {
+            color: var(--accent);
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-icons a {
+            width: 40px;
+            height: 40px;
+            border: 1px solid rgba(201, 165, 90, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        .social-icons a:hover {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: var(--primary);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(201, 165, 90, 0.2);
+            color: rgba(245, 245, 240, 0.5);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .category-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .product-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            .hero h1 {
+                font-size: 3rem;
+            }
+            .category-grid {
+                grid-template-columns: 1fr;
+            }
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .newsletter-form {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo">LUXE</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#shop">Shop</a></li>
+                <li><a href="#collections">Collections</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="nav-icons">
+                <button>🔍</button>
+                <button>👤</button>
+                <button>🛒</button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>LUXURY REDEFINED</h1>
+            <p>TIMELESS ELEGANCE FOR THE MODERN ERA</p>
+            <button class="cta-button"><span>Explore Collection</span></button>
+        </div>
+    </section>
+
+    <!-- Categories -->
+    <section class="categories" id="collections">
+        <h2 class="section-title">Shop by Category</h2>
+        <p class="section-subtitle">Curated collections for every occasion</p>
+        <div class="category-grid">
+            <div class="category-card">
+                <div class="category-image">👔</div>
+                <div class="category-overlay">
+                    <h3>Men's Collection</h3>
+                    <p>Sophisticated styles for the modern gentleman</p>
+                </div>
+            </div>
+            <div class="category-card">
+                <div class="category-image">👗</div>
+                <div class="category-overlay">
+                    <h3>Women's Collection</h3>
+                    <p>Elegant designs that captivate and inspire</p>
+                </div>
+            </div>
+            <div class="category-card">
+                <div class="category-image">💎</div>
+                <div class="category-overlay">
+                    <h3>Accessories</h3>
+                    <p>Perfect finishing touches for any ensemble</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section class="products" id="shop">
+        <h2 class="section-title">Featured Products</h2>
+        <p class="section-subtitle">Handpicked selections from our latest collection</p>
+        <div class="product-grid">
+            <div class="product-card">
+                <div class="product-image">🎩</div>
+                <div class="product-info">
+                    <h4>Premium Fedora</h4>
+                    <p class="product-price">$299</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">👜</div>
+                <div class="product-info">
+                    <h4>Leather Handbag</h4>
+                    <p class="product-price">$599</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">⌚</div>
+                <div class="product-info">
+                    <h4>Classic Watch</h4>
+                    <p class="product-price">$899</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">🕶️</div>
+                <div class="product-info">
+                    <h4>Designer Sunglasses</h4>
+                    <p class="product-price">$399</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="newsletter">
+        <h2>Join Our Exclusive Circle</h2>
+        <p>Subscribe to receive special offers and early access to new collections</p>
+        <form class="newsletter-form">
+            <input type="email" placeholder="Enter your email address" required>
+            <button type="submit">Subscribe</button>
+        </form>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>About LUXE</h3>
+                <p>Crafting luxury experiences through exceptional design and uncompromising quality since 2020.</p>
+                <div class="social-icons">
+                    <a href="#">📘</a>
+                    <a href="#">📷</a>
+                    <a href="#">🐦</a>
+                    <a href="#">💼</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#">New Arrivals</a></li>
+                    <li><a href="#">Best Sellers</a></li>
+                    <li><a href="#">Sale</a></li>
+                    <li><a href="#">Gift Cards</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Customer Care</h3>
+                <ul>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Shipping Info</a></li>
+                    <li><a href="#">Returns</a></li>
+                    <li><a href="#">FAQ</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <ul>
+                    <li><a href="#">info@luxe.com</a></li>
+                    <li><a href="#">+1 (555) 123-4567</a></li>
+                    <li>123 Luxury Ave<br>New York, NY 10001</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 LUXE. All rights reserved. | Privacy Policy | Terms of Service</p>
+        </div>
+    </footer>
+</body>
+</html>
