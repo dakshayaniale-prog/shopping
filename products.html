@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopHub - Products</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <h1>ShopHub</h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="products.html" class="active">Products</a></li>
+                <li><a href="cart.html">Cart <span id="cart-count" class="cart-badge">0</span></a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="products-section">
+        <div class="container">
+            <h2>Our Products</h2>
+            <div class="filter-section">
+                <select id="category-filter">
+                    <option value="all">All Categories</option>
+                    <option value="electronics">Electronics</option>
+                    <option value="clothing">Clothing</option>
+                    <option value="accessories">Accessories</option>
+                </select>
+                <select id="sort-filter">
+                    <option value="default">Sort By</option>
+                    <option value="price-low">Price: Low to High</option>
+                    <option value="price-high">Price: High to Low</option>
+                    <option value="name">Name: A-Z</option>
+                </select>
+            </div>
+            <div class="product-grid" id="all-products">
+                <!-- Products will be loaded here by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 ShopHub. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        let displayedProducts = [...products];
+
+        window.addEventListener('DOMContentLoaded', () => {
+            displayProducts(displayedProducts);
+            updateCartCount();
+        });
+
+        // Category filter
+        document.getElementById('category-filter').addEventListener('change', (e) => {
+            const category = e.target.value;
+            if (category === 'all') {
+                displayedProducts = [...products];
+            } else {
+                displayedProducts = products.filter(p => p.category === category);
+            }
+            applySorting();
+            displayProducts(displayedProducts);
+        });
+
+        // Sort filter
+        document.getElementById('sort-filter').addEventListener('change', (e) => {
+            applySorting();
+            displayProducts(displayedProducts);
+        });
+
+        function applySorting() {
+            const sortValue = document.getElementById('sort-filter').value;
+            
+            switch(sortValue) {
+                case 'price-low':
+                    displayedProducts.sort((a, b) => a.price - b.price);
+                    break;
+                case 'price-high':
+                    displayedProducts.sort((a, b) => b.price - a.price);
+                    break;
+                case 'name':
+                    displayedProducts.sort((a, b) => a.name.localeCompare(b.name));
+                    break;
+            }
+        }
+
+        function displayProducts(productsToDisplay) {
+            const container = document.getElementById('all-products');
+            container.innerHTML = '';
+            
+            productsToDisplay.forEach(product => {
+                const productCard = createProductCard(product);
+                container.appendChild(productCard);
+            });
+        }
+    </script>
+</body>
+</html>

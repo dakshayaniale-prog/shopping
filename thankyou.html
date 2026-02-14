@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopHub - Thank You</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <h1>ShopHub</h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="products.html">Products</a></li>
+                <li><a href="cart.html">Cart <span id="cart-count" class="cart-badge">0</span></a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="thankyou-section">
+        <div class="container">
+            <div class="thankyou-content">
+                <div class="success-icon">✓</div>
+                <h2>Thank You!</h2>
+                <p class="thankyou-message">Your message has been received successfully.</p>
+                
+                <div class="submission-details" id="submission-details">
+                    <h3>Message Details:</h3>
+                    <div class="detail-row">
+                        <strong>Name:</strong>
+                        <span id="display-name"></span>
+                    </div>
+                    <div class="detail-row">
+                        <strong>Email:</strong>
+                        <span id="display-email"></span>
+                    </div>
+                    <div class="detail-row" id="phone-row" style="display: none;">
+                        <strong>Phone:</strong>
+                        <span id="display-phone"></span>
+                    </div>
+                    <div class="detail-row">
+                        <strong>Subject:</strong>
+                        <span id="display-subject"></span>
+                    </div>
+                    <div class="detail-row">
+                        <strong>Message:</strong>
+                        <span id="display-message"></span>
+                    </div>
+                </div>
+
+                <p class="followup-message">We'll get back to you within 24-48 hours.</p>
+                
+                <div class="thankyou-actions">
+                    <a href="index.html" class="btn btn-primary">Back to Home</a>
+                    <a href="products.html" class="btn btn-secondary">Continue Shopping</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 ShopHub. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            updateCartCount();
+            
+            // Retrieve form data from localStorage
+            const formData = localStorage.getItem('contactFormData');
+            
+            if (formData) {
+                const data = JSON.parse(formData);
+                
+                // Display the data
+                document.getElementById('display-name').textContent = data.name;
+                document.getElementById('display-email').textContent = data.email;
+                document.getElementById('display-subject').textContent = data.subject;
+                document.getElementById('display-message').textContent = data.message;
+                
+                if (data.phone) {
+                    document.getElementById('display-phone').textContent = data.phone;
+                    document.getElementById('phone-row').style.display = 'flex';
+                }
+                
+                // Clear the stored data
+                localStorage.removeItem('contactFormData');
+            } else {
+                // If no data found, redirect to contact page
+                window.location.href = 'contact.html';
+            }
+        });
+    </script>
+</body>
+</html>
